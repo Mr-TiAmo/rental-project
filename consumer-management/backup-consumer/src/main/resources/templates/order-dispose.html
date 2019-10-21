@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-L-admin1.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <label for="fuel" class="layui-form-label">
+                    <span class="x-red">*</span>燃料补差价
+                </label>
+                <div class="layui-input-inline">
+                    <input type="number" min="0" id="fuel" name="fuel" required lay-verify="required"
+                           autocomplete="off" class="layui-input" onchange="a()">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>油箱是否满箱
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="fuelService" class="layui-form-label">
+                    <span class="x-red">*</span>燃油服务费
+                </label>
+                <div class="layui-input-inline">
+                    <input type="number" min="0" id="fuelService" name="fuelService" required lay-verify="required"
+                           autocomplete="off" class="layui-input" onchange="a()">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>油箱不满需100燃油服务费
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="repair" class="layui-form-label">
+                    <span class="x-red">*</span>车辆修理费用
+                </label>
+                <div class="layui-input-inline">
+                    <input type="number" min="0" id="repair" name="repair" required lay-verify="required"
+                           autocomplete="off" class="layui-input" onchange="a()">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>车辆修理费用
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="total" class="layui-form-label">
+                    <span class="x-red">*</span>合计
+                </label>
+                <div class="layui-input-inline">
+                    <input type="number" min="0" id="total" name="total" required lay-verify="required"
+                           autocomplete="off" class="layui-input" onchange="a()">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>合计
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>还车</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="isScuttle" value="0" lay-skin="primary" title="车辆入库" checked="">
+                    <input type="radio" name="isScuttle" value="1" lay-skin="primary" title="车辆检修">
+                </div>
+            </div>
+            <span>选择车辆入库、车辆状态由租赁中变为待租赁</span><br/>
+            <span>选择车辆检修、车辆状态由租赁中变为检修中</span>
+          <div class="layui-form-item">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  完成
+              </button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+      </form>
+    </div>
+    <script>
+        function a(){
+            var fuel =  parseInt($(" input[ name='fuel' ] ").val());
+            var fuelService =parseInt($(" input[ name='fuelService' ] ").val()) ;
+            var repair = parseInt($(" input[ name='repair' ] ").val());
+            alert(fuel)
+            if (fuel>0){
+                $("#fuelService").val(100);
+            }else{
+                $("#fuelService").val(0);
+            }
+            var total = fuel+repair+fuelService;
+            $("#total").val(total);
+        }
+
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+          //自定义验证规则
+          form.verify({
+            pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,repass: function(value){
+                if($('#L_pass').val()!=$('#L_repass').val()){
+                    return '两次密码不一致';
+                }
+            }
+          });
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            console.log(data);
+            //发异步，把数据提交给php
+            layer.alert("增加成功", {icon: 6},function () {
+                // 获得frame索引
+                var index = parent.layer.getFrameIndex(window.name);
+                //关闭当前frame
+                parent.layer.close(index);
+            });
+            return false;
+          });
+          
+          
+        });
+    </script>
+  </body>
+
+</html>

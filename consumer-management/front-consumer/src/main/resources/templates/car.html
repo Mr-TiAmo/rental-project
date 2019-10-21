@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>车辆查询</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <link rel="stylesheet" href="layui/css/layui.css">
+
+  <link rel="stylesheet" href="css/login.css">
+
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="skin/css/bootstrap.min.css">
+<link rel="stylesheet" href="skin/css/animate.min.css">
+<link rel="stylesheet" href="skin/css/style.css">
+
+  <script src="layui/city-picker/city-picker.data.js"></script>
+  <link href="layui/city-picker/city-picker.css" rel="stylesheet" />
+
+  <script src="layui/layui.js" charset="utf-8"></script>
+  <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+  <script>
+      function minDate(){
+          var now = new Date();
+          return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+      }
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+
+
+      //获取参数
+      function getQueryString(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+      }
+      //alert(getQueryString("name"));
+
+      var dataValue;
+      var dateObject;
+      //自定义颜色
+      laydate.render({
+        elem: '#getTime'
+        ,theme: '#393D49'
+        ,min:minDate()
+        ,done: function(value, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+          //alert(value); //得到日期生成的值，如：2017-08-18
+          dataValue = value;
+         // alert(date.month+1); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+          dateObject = date;
+
+            var dateTime =new Date(dataValue.replace(/-/g,'/')).getTime();
+            //alert(dateTime);
+          //????????????????????????????????????????????????????????????????????????????????
+          //格子主题
+          if(getQueryString("name")=='week'){
+
+              dateTime = dateTime + 86400000*7;
+            laydate.render({
+              elem: '#returnTime'
+              ,theme: '#393D49'
+              ,min:minDate()
+              ,value:new Date(dateTime).getFullYear()+'-'+(new Date(dateTime).getMonth()+1)+'-'+new Date(dateTime).getDate()
+              ,trigger: 'click'
+            });
+
+          }else if(getQueryString("name")=='month'){
+              var year = date.year;
+              var month = date.month;
+              if(month=='12'){
+                  month = 1;
+                  year += 1;
+              }else{
+                  month +=1;
+              }
+            laydate.render({
+              elem: '#returnTime'
+              ,theme: '#393D49'
+              ,min:minDate()
+              ,value:year+'-'+month+'-'+date.date
+              ,trigger: 'click'
+            });
+          }else{
+            laydate.render({
+              elem: '#returnTime'
+              ,theme: '#393D49'
+              ,min:minDate()
+            });
+          }
+        }
+
+
+
+      });
+
+
+
+
+
+
+
+    });
+  </script>
+
+  <script>
+    layui.use('form', function(){
+      var form = layui.form;
+
+      //监听提交
+      form.on('submit(formDemo)', function(data){
+        layer.msg(JSON.stringify(data.field));
+        return false;
+      });
+    });
+  </script>
+
+
+  <script>
+    layui.use('table', function(){
+      var table = layui.table;
+
+      table.render({
+        elem: '#test'
+        ,url:'/demo/table/user/' //数据接口
+        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+        ,cols: [[
+          {field:'id', title: 'ID', sort: true}
+          ,{field:'username', title: '序号'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+          ,{field:'sex', title: '品牌', sort: true}
+          ,{field:'city', title: '类型'}
+          ,{field:'sign', title: '天窗'}
+          ,{field:'classify', title: '驱动方式', align: 'center'} //单元格内容水平居中
+          ,{field:'experience', title: '颜色', sort: true, align: 'right'} //单元格内容水平居中
+          ,{field:'score', title: '排量', sort: true, align: 'right'}
+          ,{field:'score', title: '租车',  align: 'right'}
+        ]]
+        ,page: true
+      });
+    });
+  </script>
+
+<!--  省市区-->
+  <script>
+
+
+    layui.config({
+      base: 'layui/' //静态资源所在路径
+    }).extend({
+      citypicker: 'city-picker/city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+    }).use(['jquery', 'table', 'citypicker'], function () {
+      var $ = layui.$
+              , table = layui.table
+              , form = layui.form
+              , cityPicker = layui.citypicker;
+
+      var currentPicker = new cityPicker("#city-picker", {
+        provincename:"provinceId",
+        cityname:"cityId",
+        districtname: "districtId",
+        level: 'districtId',// 级别
+      });
+      currentPicker.setValue("河南省/郑州市/金水区");
+    });
+
+
+
+
+
+  </script>
+</head>
+<body id="moar">
+<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <h1 class="logo"><a class="navbar-brand" href="javascript:;">我的网站</a></h1>
+    </div>
+    <nav class="collapse navbar-right navbar-collapse" role="navigation">
+      <ul class="list-inline navbar-nav">
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+
+						<li class="hover">
+							<a href="car.html">车辆查询</a>
+						</li>
+
+						<li>
+							<a href="youshi.html">营业网点</a>
+						</li>
+
+						<li>
+							<a href="case.html">我的租车</a>
+						</li>
+
+						<li>
+							<a href="team.html">账号申诉</a>
+						</li>
+
+						<li>
+							<a href="about.html">优惠政策</a>
+						</li>
+
+						<li>
+							<a href="news.html">资讯</a>
+						</li>
+
+						<li>
+							<a href="contact.html">联系</a>
+						</li>
+
+
+                      <li class="tel visible-lg-inline-block">
+                        <a href="demo.html">登录</a>
+                      </li>
+
+                      <li class="tel visible-lg-inline-block">
+                        <a href="register.html">注册</a>
+                      </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+
+<!--end-->
+<section class="design-page sx-jianju">
+
+</section>
+<!--end-->
+<section class="design-page sx-jianju">
+  <div class="container">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+          <div class="layui-form">
+
+
+
+                  <div class="layui-inline" col-md-4>
+<!--                    <label class="layui-form-label" >城市</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                      <select name="interest" lay-filter="aihao" style="z-index: 10">-->
+<!--                        <option value=""></option>-->
+<!--                        <option value="0">写作</option>-->
+<!--                        <option value="1" selected="">阅读</option>-->
+<!--                        <option value="2">游戏</option>-->
+<!--                        <option value="3">音乐</option>-->
+<!--                        <option value="4">旅行</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+
+
+
+                      <label class="layui-form-label width_auto text-r" style="margin-top:1px;width: 100px">位置：</label>
+                      <div class="layui-input-inline" style="width:300px">
+                        <input type="text" autocomplete="on" class="layui-input" id="city-picker" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择">
+                      </div>
+
+                  </div>
+
+
+                  <div class="layui-inline " col-md-3>
+                    <label class="layui-form-label" style="width: 90px">取车时间</label>
+                    <div class="layui-input-inline">
+
+                      <input type="text" class="layui-input" id="getTime" placeholder="yyyy-MM-dd">
+                    </div>
+                  </div>
+
+
+                  <div class="layui-inline" col-md-3>
+                    <label class="layui-form-label" style="width: 90px">还车时间</label>
+                    <div class="layui-input-inline">
+                      <input type="text" class="layui-input" id="returnTime" placeholder="yyyy-MM-dd" readonly="">
+                    </div>
+                  </div>
+
+                  <div class="layui-inline col-md-offset-1" >
+                      <button type="button" class="layui-btn layui-btn-warm layui-btn-radius">查询</button>
+                  </div>
+
+
+
+          </div>
+      </div>
+  </div>
+</section>
+<!--end-->
+
+
+<!--显示结果-->
+<section class="design-page sx-jianju" style="z-index: -100">
+  <div class="container " style="height: 500px">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
+      <div class="layui-form">
+        <div class="layui-form-item">
+
+
+<!--          使用ajax请求-->
+          <table class="layui-hide" id="test"></table>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--end-->
+
+
+
+<!--end-->
+<footer class="foot text-center">
+  <div class="addess">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <dl class="dl-horizontal list-unstyled">
+            <dt><span class="icon-foot-addess"></span></dt>
+            <dd>
+              <h3>中国·郑州市</h3>
+              <p>金水区杨金路</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <dl class="dl-horizontal list-unstyled">
+            <dt><span class="icon-foot-tel"></span></dt>
+            <dd>
+              <h3>24小时服务</h3>
+              <p>027-88888888</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <dl class="dl-horizontal list-unstyled">
+            <dt><span class="icon-foot-map"></span></dt>
+            <dd>
+              <h3><a href="javascript:;" target="_blank">在地图上找到我们</a></h3>
+              <p>欢迎阁下莅临公司参观指导！</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copy container">
+    <ul class="list-inline menu-kj list-paddingleft-2">
+
+      <li>
+        <p>
+          <a href="javascript:;">设计</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">优势</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">案例</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">团队</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">关于</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">资讯</a>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <a href="javascript:;">联系</a>
+        </p>
+      </li>
+
+    </ul>
+    <p>
+      Copyright &copy; 2014-2019 HI 租车有限公司 版权所有 <span class="hidden-xs"><a href="javascript:;" target="_blank">备案号：豫ICP备88888888号</a></span></p>
+    <ul class="list-inline kjcd">
+      <li class="qq">
+        <a href="javascript:;" target="_blank"><span class="icon-qq"></span></a>
+      </li>
+      <li class="weixin">
+        <a href="javascript:;" data-toggle="modal" data-target="#foot-weixin"><span class="icon-weixin"></span></a>
+      </li>
+      <li class="weibo">
+        <a href="javascript:;" target="_blank"><span class="icon-weibo"></span></a>
+      </li>
+    </ul>
+
+    <div class="modal fade" id="foot-weixin" tabindex="-1" role="dialog" aria-labelledby="myweixin" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myweixin">微信扫一扫，关注我们</h4>
+          </div>
+          <div class="modal-body"> <img src="skin/images/weixin-pic.jpg" alt="微信公众号" />
+            <p>打开微信，使用扫一扫即可关注我们。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--end-->
+<ul class="list-unstyled kefu visible-xs-block">
+  <li>
+    <a class="gt" href="javascript:;" title="在线沟通" target="_blank"><span class="icon-goutong"></span></a>
+  </li>
+  <li class="hidden-xs">
+    <a class="lx" href="javascript:;" title="联系"><span class="icon-page-lianxi"></span></a>
+  </li>
+  <li class="visible-xs-inline-block">
+    <a class="lx" href="javascript:;" title="拔打电话"><span class="icon-page-lianxi"></span></a>
+  </li>
+  <li>
+    <a id="top" class="top" href="javascript:;" title="回顶部"><span class="icon-top"></span></a>
+  </li>
+</ul>
+<!--end-->  
+<script src="skin/js/jquery.min.js"></script> 
+<script src="skin/js/wow.min.js"></script> 
+<script src="skin/js/base.js"></script> 
+<script src="skin/js/sdcms.hits.js"></script> 
+<script src="skin/js/bootstrap.min.js"></script> 
+<script>
+wow = new WOW(
+{animateClass: 'animated',
+offset:100});
+wow.init();
+document.getElementById('moar').onclick = function() {
+var section = document.createElement('section');
+section.className = 'section--purple wow fadeInDown';
+this.parentNode.insertBefore(section, this);};
+</script> 
+
+<script src="skin/js/fastclick.min.js"></script>
+</body>
+</html>

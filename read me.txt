@@ -1,0 +1,124 @@
+记得修改数据源的ip
+
+
+
+无论是什么项目，架构都是一样的
+架构不是针对于项目的，是针对于项目的整体开发需求和环境所定制的
+只要学过都会用，绝对是合理安排
+使用的技术:
+springboot
+springcloud/dubbo
+ES
+redis
+ftp
+mycat
+shiro
+sso
+swagger2(前后端分离)
+
+--->项目开发完毕实现docker部署，nginx也是项目部署的时候使用
+
+租房网:
+	前台
+
+	后台
+
+	前后台项目分开介绍
+
+整体项目是由springcloud做架构支撑，但是springcloud由必须要使用springboot做项目支撑
+
+rent:父级工程(pom)，管理所有项目的jar包
+	common:公共工程(并不是说只针对于这个项目的公共工程，适用于所有的项目的公共工程)(jar)
+		各种工具类以及base层(BaseController，统一返回值(只是controller向HTML页面所定义的返回值，不需要使用到model))
+		只要涉及到封装的类/组件都必须要实现在common工程
+		规定：
+			不能依赖于任何项目
+
+	config:配置工程(jar)
+		不是springcloud的分布式配置中心
+		实现了所有的组件以及框架的配置(redis,ES,ftp....)
+		FtpUtil.java
+		config工程必须要依赖于common工程
+
+	为了很好的横向扩展
+	eureka-management:(需要单独部署(7001,7002,7003))
+		eureka:注册中心(jar/war)
+		用于服务的注册与发现
+	不能产生任何依赖
+
+	kernel:shiro(jar)
+		实现了shiro的realm以及shiro的配置
+		支撑后台项目实现认证和授权
+		realm:
+			认证
+			授权
+			无论是认证还是授权都用到了service
+		不能依赖于service
+		需要依赖于api
+
+	login:单点登录(jar/war)
+		支撑前台项目实现单点登录
+
+	management:项目分层管理(pom)
+		model:实体类以及baseModel(jar)
+			只要和实体类有关的都要放在项目中
+			entity,baseEntity(id,创建时间,修改时间,状态,冗余字段),vo类型(当实现多表联查的时候，查询出的字段使用任意一个实体类都无法满足，所以需要分装vo类型),page(分页的封装类)
+			User extend BaseModel
+			不需要依赖于任何项目
+
+		mapper:就是mybatis的mapper接口以及xml实现类(jar)(使用的有通用mapper)
+			需要依赖于model
+
+		service:存放了所有的业务逻辑(jar)
+			所有的业务逻辑都是增删改查，service层的封装(BaseService)，所有的service都必须要继承BaseService
+			T selectUserById(String id);
+			T selectDictById(String id);
+			需要依赖于mapper
+
+		api:
+			支持hystrix(熔断和服务降级)+feign(负载均衡，因为feign遵循的就是MVC模式)的代码
+			consumer --->feign(IService(I) @RequestMapping("/addUser"))---> provider(@RequestMapping("/addUser"))
+			需要依赖于model
+
+		web:
+			项目冗余
+
+	zuul:(jar/war)
+		路由(eureka)
+		不需要任何依赖
+
+	provider-management:服务器生产者父级项目(pom)
+		需要依赖于service，还需要依赖于common
+		front:前台项目的服务生产者
+		backup:后台项目的服务生产者
+
+	consumer-management:服务器消费者父级项目(pom)
+		需要依赖于api
+		需要依赖于config-->就间接的依赖了common
+		front:前台项目的服务消费者---> 前台项目的服务生产者
+			需要依赖于login
+			
+		backup:后台项目的服务消费者---> 后台项目的服务生产者
+			需要依赖于kernel
+
+		不能间接的又依赖了mapper--->需要配置数据源！
+		但是consumer项目只和客户端打交道--->所有的一切有关数据增删改查都必须要在provider完成
+
+springcloud:
+	eureka
+	feign
+	hystrix
+	zuul
+springboot
+
+mybatis
+
+tk-mapper:通用插件
+	UserMapper(I) extends BaseMapper<T>
+	select * from t
+
+pagehelper:通用分页
+	所有的分页查询，都已经完全支持，直接传入Page对象
+
+
+
