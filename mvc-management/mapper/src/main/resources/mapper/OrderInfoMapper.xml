@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaa.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.aaa.model.OrderInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="m_id" property="mId" jdbcType="VARCHAR" />
+    <result column="payment_method" property="paymentMethod" jdbcType="VARCHAR" />
+    <result column="order_time" property="orderTime" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="VARCHAR" />
+    <result column="set_meal" property="setMeal" jdbcType="VARCHAR" />
+    <result column="additiona_services" property="additionaServices" jdbcType="VARCHAR" />
+    <result column="rental_days" property="rentalDays" jdbcType="INTEGER" />
+    <result column="get_cat_storeId" property="getCatStoreid" jdbcType="VARCHAR" />
+    <result column="return_cat_storeId" property="returnCatStoreid" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
+    <result column="actual_payment" property="actualPayment" jdbcType="DOUBLE" />
+    <result column="vehicle_info" property="vehicleInfo" jdbcType="VARCHAR" />
+    <result column="service_score" property="serviceScore" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="redundance" property="redundance" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
