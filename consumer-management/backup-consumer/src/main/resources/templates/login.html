@@ -15,7 +15,6 @@
     <script>
         $(function () {
             $("#login").click(function () {
-                alert(1);
                 $.ajax({
                     url:"login",
                     //data:$("#login-form").serialize(),
@@ -53,7 +52,7 @@
  <h2>HI租车后台管理登录</h2>
 <input type="text" placeholder="用户名" value="admin" id="username" />
 <input type="password" placeholder="密码" id="password" />
-<input id="login" type="button"  value="登　录" >
+<input id="login" type="button"  value="登　录" class="button">
 <!--<p class="message">还没有账户? <a href="#">立刻创建</a></p>-->
 </form>
 </div>

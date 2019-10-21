@@ -15,6 +15,18 @@
     <script src="static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="static/js/xadmin.js"></script>
 
+    <script>
+        $(function () {
+            $("#logout").click(function () {
+                location.href = "/logout";
+            });
+
+            $("#car").click(function () {
+                location.href = "/turnCarPage";
+            });
+        })
+
+    </script>
 </head>
 <body>
     <!-- 顶部开始 -->
@@ -39,7 +51,7 @@
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
 <!--              <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>-->
-              <dd><a href="login.html">退出</a></dd>
+              <dd><a id="logout">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
@@ -69,7 +81,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>车辆信息管理</cite></a></li>
+                    <li><a id="car"><i class="iconfont">&#xe6a7;</i>车辆信息管理</a></li>
 <!--                    <li><a _href="html/unicode.html"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>-->
 <!--                    <li><a _href="html/form1.html"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>-->
 <!--                    <li> <a _href="html/form2.html"><i class="iconfont">&#xe6a7;</i><cite>表单组合</cite></a></li>-->
@@ -109,7 +121,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/grid.html"><i class="iconfont">&#xe6a7;</i><cite>申诉管理</cite></a></li>
+                    <li><a _href="/grid.html"><i class="iconfont">&#xe6a7;</i><cite>申诉管理</cite></a></li>
 <!--                    <li><a _href="html/welcome2.html"><i class="iconfont">&#xe6a7;</i><cite>排版</cite></a></li>-->
                 </ul>
             </li>
@@ -122,7 +134,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/order-list.html">
+                        <a _href="../order-list.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表</cite>
                         </a>
