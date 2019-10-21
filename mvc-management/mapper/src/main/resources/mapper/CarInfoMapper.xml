@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaa.mapper.CarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.aaa.model.CarInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="plate_numbers" property="plateNumbers" jdbcType="VARCHAR" />
+    <result column="is_scuttle" property="isScuttle" jdbcType="INTEGER" />
+    <result column="dict_car_fuel_id" property="dictCarFuelId" jdbcType="INTEGER" />
+    <result column="dict_car_drive_id" property="dictCarDriveId" jdbcType="INTEGER" />
+    <result column="dict_car_store_id" property="dictCarStoreId" jdbcType="INTEGER" />
+    <result column="dict_car_status_id" property="dictCarStatusId" jdbcType="INTEGER" />
+    <result column="dict_car_color_id" property="dictCarColorId" jdbcType="INTEGER" />
+    <result column="dict_car_power_id" property="dictCarPowerId" jdbcType="INTEGER" />
+    <result column="dict_car_brand_id" property="dictCarBrandId" jdbcType="INTEGER" />
+    <result column="dict_car_style_id" property="dictCarStyleId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="redundancy" property="redundancy" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
