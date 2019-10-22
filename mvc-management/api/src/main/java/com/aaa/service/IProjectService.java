@@ -3,6 +3,7 @@ package com.aaa.service;
 import base.ResultData;
 import com.aaa.fallback.ProjectServiceFallBack;
 import com.aaa.model.Management;
+import com.aaa.model.Order;
 import com.aaa.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ public interface IProjectService {
 
     @RequestMapping("/queryManageByUsername")
     ResultData<Management> selectUserByUsername(@RequestParam("username")String username);
+
+    @RequestMapping("/selectAllOrders")
+    List<Order> selectAllOrders();
 
 
 }
