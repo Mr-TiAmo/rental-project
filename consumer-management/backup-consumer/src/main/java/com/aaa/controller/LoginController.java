@@ -21,7 +21,7 @@ import status.LoginStatus;
 * @Author: 栗翱
 * @Date: 2019/10/20
 */
-@Controller
+@Controller()
 @Api(value = "后台登录管理", tags = "后台登录管理")
 public class LoginController extends BaseController {
 

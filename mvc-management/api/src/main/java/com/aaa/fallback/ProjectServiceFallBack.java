@@ -9,21 +9,21 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class ProjectServiceFallBack implements FallbackFactory<IProjectService> {
-    @Override
-    public IProjectService create(Throwable throwable) {
-        return new IProjectService() {
-            @Override
-            public List<User> selectAllUsers() {
-                return null;
-            }
-
-            @Override
-            public ResultData<Management> selectUserByUsername(String username) {
-                return null;
-            }
-        };
-
-    }
+//@Component
+public class ProjectServiceFallBack {
+//    @Override
+//    public IProjectService create(Throwable throwable) {
+//        return new IProjectService() {
+//            @Override
+//            public List<User> selectAllUsers() {
+//                return null;
+//            }
+//
+//            @Override
+//            public ResultData<Management> selectUserByUsername(String username) {
+//                return null;
+//            }
+//        };
+//
+//    }
 }

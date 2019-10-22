@@ -10,20 +10,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
-  <link rel="stylesheet" href="layui/css/layui.css">
+  <link rel="stylesheet" href="/static/lib/layui/css/layui.css">
 
-  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="/static/css/login.css">
 
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="stylesheet" href="skin/css/bootstrap.min.css">
-<link rel="stylesheet" href="skin/css/animate.min.css">
-<link rel="stylesheet" href="skin/css/style.css">
+<link rel="stylesheet" href="/static/skin/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/skin/css/animate.min.css">
+<link rel="stylesheet" href="/static/skin/css/style.css">
 
-  <script src="layui/city-picker/city-picker.data.js"></script>
-  <link href="layui/city-picker/city-picker.css" rel="stylesheet" />
+  <script src="/static/city-picker/city-picker.data.js"></script>
+  <link href="/static/city-picker/city-picker.css" rel="stylesheet" />
 
-  <script src="layui/layui.js" charset="utf-8"></script>
+  <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
   <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
   <script>
       function minDate(){
@@ -150,9 +150,9 @@
 
 
     layui.config({
-      base: 'layui/' //静态资源所在路径
+      base: '/static/' //静态资源所在路径
     }).extend({
-      citypicker: 'city-picker/city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+      citypicker: 'city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
     }).use(['jquery', 'table', 'citypicker'], function () {
       var $ = layui.$
               , table = layui.table
@@ -183,13 +183,13 @@
     </div>
     <nav class="collapse navbar-right navbar-collapse" role="navigation">
       <ul class="list-inline navbar-nav">
-						<li>
-							<a href="index.html">首页</a>
-						</li>
+                      <li>
+                        <a href="/front/">首页</a>
+                      </li>
 
-						<li class="hover">
-							<a href="car.html">车辆查询</a>
-						</li>
+                      <li>
+                        <a href="/front/turnCarPage">车型查询</a>
+                      </li>
 
 						<li>
 							<a href="youshi.html">营业网点</a>
@@ -217,7 +217,7 @@
 
 
                       <li class="tel visible-lg-inline-block">
-                        <a href="demo.html">登录</a>
+                        <a href="login.html">登录</a>
                       </li>
 
                       <li class="tel visible-lg-inline-block">
@@ -244,17 +244,6 @@
 
 
                   <div class="layui-inline" col-md-4>
-<!--                    <label class="layui-form-label" >城市</label>-->
-<!--                    <div class="layui-input-block">-->
-<!--                      <select name="interest" lay-filter="aihao" style="z-index: 10">-->
-<!--                        <option value=""></option>-->
-<!--                        <option value="0">写作</option>-->
-<!--                        <option value="1" selected="">阅读</option>-->
-<!--                        <option value="2">游戏</option>-->
-<!--                        <option value="3">音乐</option>-->
-<!--                        <option value="4">旅行</option>-->
-<!--                      </select>-->
-<!--                    </div>-->
 
 
 
@@ -305,13 +294,6 @@
 
 <!--          使用ajax请求-->
           <table class="layui-hide" id="test"></table>
-
-
-
-
-
-
-
 
 
 
@@ -452,11 +434,11 @@
   </li>
 </ul>
 <!--end-->  
-<script src="skin/js/jquery.min.js"></script> 
-<script src="skin/js/wow.min.js"></script> 
-<script src="skin/js/base.js"></script> 
-<script src="skin/js/sdcms.hits.js"></script> 
-<script src="skin/js/bootstrap.min.js"></script> 
+<script src="/static/skin/js/jquery.min.js"></script>
+<script src="/static/skin/js/wow.min.js"></script>
+<script src="/static/skin/js/base.js"></script>
+<script src="/static/skin/js/sdcms.hits.js"></script>
+<script src="/static/skin/js/bootstrap.min.js"></script>
 <script>
 wow = new WOW(
 {animateClass: 'animated',
@@ -468,6 +450,6 @@ section.className = 'section--purple wow fadeInDown';
 this.parentNode.insertBefore(section, this);};
 </script> 
 
-<script src="skin/js/fastclick.min.js"></script>
+<script src="/static/skin/js/fastclick.min.js"></script>
 </body>
 </html>

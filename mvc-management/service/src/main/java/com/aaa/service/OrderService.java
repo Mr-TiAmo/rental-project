@@ -20,11 +20,12 @@ public class OrderService extends BaseService<Order> {
     private OrderMapper orderMapper;
 
 
+    @Override
     public Mapper<Order> getMapper() {
-        return null;
+        return orderMapper;
     }
 
-    /*
+    /**
      *              查询所有的订单
      *@author ryh
      *date 2019/10/21 22:01

@@ -10,9 +10,17 @@
 		<title>我的网站</title>
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="skin/css/bootstrap.min.css">
-		<link rel="stylesheet" href="skin/css/animate.min.css">
-		<link rel="stylesheet" href="skin/css/style.css">
+		<link rel="stylesheet" href="/static/skin/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/skin/css/animate.min.css">
+		<link rel="stylesheet" href="/static/skin/css/style.css">
+
+        <script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+        <script>
+            $(function () {
+
+
+            });
+        </script>
 	</head>
 
 	<body id="moar">
@@ -25,11 +33,11 @@
 				<nav class="collapse navbar-right navbar-collapse" role="navigation">
 					<ul class="list-inline navbar-nav">
 						<li>
-							<a href="index.html">首页</a>
+							<a href="/front/">首页</a>
 						</li>
 
 						<li>
-							<a href="car.html">车型查询</a>
+							<a href="/front/turnCarPage">车型查询</a>
 						</li>
 
 						<li>
@@ -57,7 +65,7 @@
 						</li>
 
 						<li class="tel visible-lg-inline-block">
-							<a href="demo.html">登录</a>
+							<a href="/front/turnLoginPage">登录</a>
 						</li>
 
 						<li class="tel visible-lg-inline-block">
@@ -71,14 +79,14 @@
 		<!--end-->
 		<section class="banner">
 			<div id="owl-banner" class="owl-carousel owl-theme">
-				<div class="item" style="background:url(skin/images/1-1P3200Z1570-L.jpg)">
-					<a><img src="skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
+				<div class="item" style="background:url(/static/skin/images/1-1P3200Z1570-L.jpg)">
+					<a><img src="/static/skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
 				</div>
-				<div class="item" style="background:url(skin/images/1-1P3200Z2230-L.jpg)">
-					<a><img src="skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
+				<div class="item" style="background:url(/static/skin/images/1-1P3200Z2230-L.jpg)">
+					<a><img src="/static/skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
 				</div>
-				<div class="item" style="background:url(skin/images/1-1P3200Z2100-L.jpg)">
-					<a><img src="skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
+				<div class="item" style="background:url(/static/skin/images/1-1P3200Z2100-L.jpg)">
+					<a><img src="/static/skin/images/banner-height.gif" class="center-block" alt="幻灯3" /></a>
 				</div>
 
 			</div>
@@ -105,13 +113,13 @@
 
 				<div class="row design">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 wow animated fadeInUp">
-						<figure style="background-image:url(skin/images/1-1P3211044180-L.jpg)"> <a href="car.html?name=week" title="周租套餐">
+						<figure style="background-image:url(/static/skin/images/1-1P3211044180-L.jpg)"> <a href="car.html?name=week" title="周租套餐">
 							<h3 style="color: #eea236">周租套餐</h3>
 							<p class="hg-2" style="color: #eea236">周租为7天时间可选择周租套餐，享受套餐95折,须先全部付清费用，提前还车概不退款</p>
 							<p><span class="icon-next"></span></p>
 						</a> </figure>
 					</div><div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 wow animated fadeInUp">
-					<figure style="background-image:url(skin/images/1-1P3211044070-L.jpg)"> <a href="car.html?name=month" title="月租套餐">
+					<figure style="background-image:url(/static/skin/images/1-1P3211044070-L.jpg)"> <a href="car.html?name=month" title="月租套餐">
 						<h3 style="color: #eea236">月租套餐</h3>
 						<p class="hg-2" style="color: #eea236">月租为一个月时间可选择月租套餐，享受套餐9折,须先全部付清费用，提前还车概不退款
                         </p>
@@ -134,7 +142,7 @@
 				<div class="row">
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="时尚 省油"><img src="skin/images/1-1P3201024310-L.jpg" alt="时尚 省油" />
+							<a href="car.html" title="时尚 省油"><img src="/static/skin/images/1-1P3201024310-L.jpg" alt="时尚 省油" />
 								<figcaption>
 									<h3>时尚 省油<span>现代SUV</span></h3>
 								</figcaption>
@@ -143,7 +151,7 @@
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="时尚 空间"><img src="skin/images/1-1P320102J30-L.jpg" alt="时尚 空间" />
+							<a href="car.html" title="时尚 空间"><img src="/static/skin/images/1-1P320102J30-L.jpg" alt="时尚 空间" />
 								<figcaption>
 									<h3>时尚 空间<span>现代SUV</span></h3>
 								</figcaption>
@@ -152,7 +160,7 @@
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="时尚 电动"><img src="skin/images/1-1P3201211110-L.jpg" alt="时尚 电动" />
+							<a href="car.html" title="时尚 电动"><img src="/static/skin/images/1-1P3201211110-L.jpg" alt="时尚 电动" />
 								<figcaption>
 									<h3>时尚 电动<span>荣威电动车</span></h3>
 								</figcaption>
@@ -161,7 +169,7 @@
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="精致 舒适"><img src="skin/images/1-1P3201211380-L.jpg" alt="精致 舒适" />
+							<a href="car.html" title="精致 舒适"><img src="/static/skin/images/1-1P3201211380-L.jpg" alt="精致 舒适" />
 								<figcaption>
 									<h3>精致 舒适<span>大众朗逸</span></h3>
 								</figcaption>
@@ -170,7 +178,7 @@
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="空间 舒适"><img src="skin/images/1-1P3201211570-L.jpg" alt="空间 舒适" />
+							<a href="car.html" title="空间 舒适"><img src="/static/skin/images/1-1P3201211570-L.jpg" alt="空间 舒适" />
 								<figcaption>
 									<h3>空间 运动<span>大众速腾</span></h3>
 								</figcaption>
@@ -179,7 +187,7 @@
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 						<figure>
-							<a href="car.html" title="空间 操控"><img src="skin/images/1-1P3201210390-L.jpg" alt="空间 操控" />
+							<a href="car.html" title="空间 操控"><img src="/static/skin/images/1-1P3201210390-L.jpg" alt="空间 操控" />
 								<figcaption>
 									<h3>空间 操控<span>大众斯柯达</span></h3>
 								</figcaption>
@@ -202,18 +210,18 @@
 					<p class="m-sm"> Testimonials </p>
 				</div>
 				<div class="row">
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3211000060-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3210959440-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P320112Q20-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P320112J60-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P320112I20-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P320112H00-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P320112F40-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3201126460-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3201126340-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3201126230-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3201125570-L.jpg" alt="" /></figure>
-					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="skin/images/1-1P3201125430-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3211000060-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3210959440-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P320112Q20-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P320112J60-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P320112I20-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P320112H00-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P320112F40-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3201126460-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3201126340-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3201126230-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3201125570-L.jpg" alt="" /></figure>
+					<figure class="col-xs-4 col-sm-4 col-md-2 col-lg-2 wow animated fadeInUp"><img src="/static/skin/images/1-1P3201125430-L.jpg" alt="" /></figure>
 
 				</div>
 
@@ -471,12 +479,12 @@
 			</li>
 		</ul>
 		<!--end-->
-		<script src="skin/js/jquery.min.js"></script>
-		<script src="skin/js/owl.carousel.min.js"></script>
-		<script src="skin/js/owl.carousel.quote.js"></script>
-		<script src="skin/js/wow.min.js"></script>
-		<script src="skin/js/base.js"></script>
-		<script src="skin/js/bootstrap.min.js"></script>
+		<script src="/static/skin/js/jquery.min.js"></script>
+		<script src="/static/skin/js/owl.carousel.min.js"></script>
+		<script src="/static/skin/js/owl.carousel.quote.js"></script>
+		<script src="/static/skin/js/wow.min.js"></script>
+		<script src="/static/skin/js/base.js"></script>
+		<script src="/static/skin/js/bootstrap.min.js"></script>
 		<script>
 			wow = new WOW({
 				animateClass: 'animated',
@@ -489,7 +497,7 @@
 				this.parentNode.insertBefore(section, this);
 			};
 		</script>
-		<script src="skin/js/fastclick.min.js"></script>
+		<script src="/static/skin/js/fastclick.min.js"></script>
 		<script>
 			$(function() {
 				$(".navbar-nav li:first-child").addClass("hover");
