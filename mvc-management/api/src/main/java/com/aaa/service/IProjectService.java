@@ -5,7 +5,9 @@ import com.aaa.fallback.ProjectServiceFallBack;
 import com.aaa.model.Management;
 import com.aaa.model.Order;
 import com.aaa.model.User;
+import com.aaa.vo.ManagementVo;
 import com.aaa.vo.VoCarInfo;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +34,7 @@ public interface IProjectService {
     @PostMapping("/queryCarByCondition")
     ResultData queryCarInfo(@RequestBody VoCarInfo voCarInfo);
 
+    @RequestMapping
+    ResultData<ManagementVo> selectManagementVo(@RequestParam("id") String id);
 }
 

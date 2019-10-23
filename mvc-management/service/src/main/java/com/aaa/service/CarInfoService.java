@@ -28,17 +28,17 @@ public class CarInfoService extends BaseService<CarInfo> {
     }
 
     /**
-    * @Description: 根据条件查询车辆信息
-    * @Param:
-    * @return:
-    * @Author: 栗翱
-    * @Date: 2019/10/22
-    */
-    public ResultData queryCarInfo(VoCarInfo voCarInfo){
-        ResultData resultData = new ResultData<>();
-        try {
-
-            List<VoCarInfo> voCarInfos = carInfoMapper.queryCarInfo(voCarInfo);
+     * @Description: 根据条件查询车辆信息
+     * @Param:
+     * @return:
+     * @Author: 栗翱
+     * @Date: 2019/10/22
+     */
+//    public ResultData queryCarInfo(VoCarInfo voCarInfo){
+//        ResultData resultData = new ResultData<T>();
+//        try {
+//
+//            List<VoCarInfo> voCarInfos = carInfoMapper.queryCarInfo(voCarInfo);
 
 
 //            //分页
@@ -47,20 +47,20 @@ public class CarInfoService extends BaseService<CarInfo> {
 //            pageInfo.setTotal(carInfoMapper.queryCarInfoConut(voCarInfo));
 
 
-            //查询到值
-            if(voCarInfos.size()>0){
-                resultData.setCode(StatusEnum.EXIST.getCode());
-                resultData.setMsg(StatusEnum.EXIST.getMsg());
-                resultData.setData(voCarInfos);
-            }else{
-                resultData.setCode(StatusEnum.NOT_EXIST.getCode());
-                resultData.setMsg(StatusEnum.NOT_EXIST.getMsg());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        return resultData;
-    }
+//            //查询到值
+////            if(voCarInfos.size()>0){
+////                resultData.setCode(StatusEnum.EXIST.getCode());
+////                resultData.setMsg(StatusEnum.EXIST.getMsg());
+////                resultData.setData(voCarInfos);
+////            }else{
+////                resultData.setCode(StatusEnum.NOT_EXIST.getCode());
+////                resultData.setMsg(StatusEnum.NOT_EXIST.getMsg());
+////            }
+////        }catch (Exception e){
+////            e.printStackTrace();
+////        }
+////
+////
+////        return resultData;
+////    }
 }

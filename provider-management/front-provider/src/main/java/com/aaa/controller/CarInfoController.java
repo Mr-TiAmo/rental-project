@@ -20,9 +20,9 @@ public class CarInfoController {
 
     @Autowired
     private CarInfoService carInfoService;
-
-    @PostMapping("/queryCarByCondition")
-    public ResultData queryCarInfo(@RequestBody VoCarInfo voCarInfo){
-        return carInfoService.queryCarInfo(voCarInfo);
-    }
+//
+//    @PostMapping("/queryCarByCondition")
+//    public ResultData queryCarInfo(@RequestBody VoCarInfo voCarInfo){
+//        return carInfoService.queryCarInfo(voCarInfo);
+//    }
 }
