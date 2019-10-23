@@ -4,13 +4,11 @@ import base.BaseController;
 import base.ResultData;
 import com.aaa.model.User;
 import com.aaa.service.IProjectService;
+import com.aaa.vo.VoCarInfo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import status.LoginStatus;
 import utils.CookieUtil;
 
@@ -25,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 * @Date: 2019/10/21
 */
 @Controller
-@RequestMapping("/front")
+@RequestMapping("/front" +
+        "")
 public class LoginController extends BaseController {
 
     @Autowired
@@ -37,11 +36,7 @@ public class LoginController extends BaseController {
         return "login";
     }
 
-    @GetMapping("/turnCarPage")
-    @ApiOperation(value = "跳转car页面", notes = "使用springmvc的controller跳转到car页面")
-    public String turnCarPage() {
-        return "car";
-    }
+
 
     @RequestMapping("/")
     @ApiOperation(value = "跳转index页面", notes = "使用springmvc的controller跳转index页面")
@@ -63,5 +58,12 @@ public class LoginController extends BaseController {
         }
         return resultData;
 
+    }
+
+
+    @RequestMapping("/turnRegister")
+    @ApiOperation(value = "前台注册页面",notes = "前台注册页面")
+    public String turnRegister(){
+        return "register";
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
 import java.io.Serializable;
 /**
 * @Description: 用于查询的车辆的vomodel
@@ -15,6 +16,7 @@ import java.io.Serializable;
 * @Author: 栗翱
 * @Date: 2019/10/22
 */
+@Table(name="vocarinfo")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,49 +42,49 @@ public class VoCarInfo implements Serializable {
     /**
      * 车辆的变速箱类型
      */
-    @Column(name = "name1")
+
     private String operation;
     /**
      * 车辆的座位数
      */
-    @Column(name = "name2")
+
     private String space;
     /**
      * 车辆的燃料类型
      */
-    @Column(name = "name3")
+
     private String fuel;
     /**
      * 车辆的驱动方式
      */
-    @Column(name = "name4")
+
     private String drive;
     /**
      * 车辆的租赁状态
      */
-    @Column(name = "name5")
+
     private String carStatus;
     /**
      * 车辆的颜色
      */
-    @Column(name = "name6")
+
     private String color;
 
     /**
      * 车辆的排量
      */
-    @Column(name = "name7")
+
     private String power;
 
     /**
      * 车辆的品牌
      */
-    @Column(name = "name8")
+
     private String brand;
     /**
      * 车辆的款式
      */
-    @Column(name = "name9")
+
     private String style;
     /**
      * 车辆的门店地址
@@ -90,6 +92,23 @@ public class VoCarInfo implements Serializable {
     @Column(name = "store_location")
     private String storeLocation;
 
+    /**
+     * 套餐类型
+     */
+    private String setMeal;
 
+    /**
+     * 按条件查询的位置
+     */
+    private String chooseLocation;
+
+    /**
+     * 按条件查询的取车时间
+     */
+    private String getTime;
+    /**
+     * 按条件查询的还车时间
+     */
+    private String returnTime;
 
 }

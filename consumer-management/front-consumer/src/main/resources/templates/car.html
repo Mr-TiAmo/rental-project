@@ -23,6 +23,9 @@
   <script src="/static/city-picker/city-picker.data.js"></script>
   <link href="/static/city-picker/city-picker.css" rel="stylesheet" />
 
+  <style>
+
+  </style>
   <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
   <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
   <script>
@@ -35,8 +38,8 @@
 
 
       //获取参数
-      function getQueryString(name){
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+      function getQueryString(setMeal){
+        var reg = new RegExp("(^|&)"+ setMeal +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
         if(r!=null)return  unescape(r[2]); return null;
       }
@@ -59,7 +62,7 @@
             //alert(dateTime);
           //????????????????????????????????????????????????????????????????????????????????
           //格子主题
-          if(getQueryString("name")=='week'){
+          if(getQueryString("setMeal")=='week'){
 
               dateTime = dateTime + 86400000*7;
             laydate.render({
@@ -70,7 +73,7 @@
               ,trigger: 'click'
             });
 
-          }else if(getQueryString("name")=='month'){
+          }else if(getQueryString("setMeal")=='month'){
               var year = date.year;
               var month = date.month;
               if(month=='12'){
@@ -101,10 +104,6 @@
 
 
 
-
-
-
-
     });
   </script>
 
@@ -120,30 +119,88 @@
     });
   </script>
 
-
+  <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
   <script>
-    layui.use('table', function(){
-      var table = layui.table;
+      $(function () {
 
-      table.render({
-        elem: '#test'
-        ,url:'/demo/table/user/' //数据接口
-        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-        ,cols: [[
-          {field:'id', title: 'ID', sort: true}
-          ,{field:'username', title: '序号'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-          ,{field:'sex', title: '品牌', sort: true}
-          ,{field:'city', title: '类型'}
-          ,{field:'sign', title: '天窗'}
-          ,{field:'classify', title: '驱动方式', align: 'center'} //单元格内容水平居中
-          ,{field:'experience', title: '颜色', sort: true, align: 'right'} //单元格内容水平居中
-          ,{field:'score', title: '排量', sort: true, align: 'right'}
-          ,{field:'score', title: '租车',  align: 'right'}
-        ]]
-        ,page: true
+        test();
+
+        $("#choose").click(function () {
+          test();
+        });
+
       });
-    });
+
+
+      function test(){
+        // var formData = new FormData($("#carInfo")[1]);
+        // alert(formData);
+        $.ajax({
+          url:"/front/queryCarByCondition",
+          data: {"chooseLocation":$("#chooseLocation").val(),"getTime":$("#getTime").val(),"returnTime":$("#returnTime").val()},
+          type:"POST",
+          dataType: "json",
+          // processData: false,
+          // contentType: false,
+          success:function (data) {
+            if(data.code == '3'){
+              $("#showCar").empty();
+              var car = data.data;
+              var tr = "";
+              for(var i = 0; i<car.length; i++){
+                tr+="<tr>";
+                tr+="<td>"+car[i].id+"</td>";
+                tr+="<td>"+car[i].name+"</td>";
+                tr+="<td>"+car[i].storeLocation+"</td>";
+                tr+="<td>"+car[i].style+"</td>";
+                tr+="<td>"+car[i].space+"</td>";
+                tr+="<td>"+car[i].drive+"</td>";
+                tr+="<td>"+car[i].color+"</td>";
+                tr+="<td>"+car[i].power+"</td>";
+
+
+                tr+="<td><a style='' href='' >租车</a></td>";
+                tr+="</tr>";
+
+              }
+
+              $("#showCar").append(tr);
+            }
+
+          },
+          error:function () {
+            alert("失败");
+          }
+        });
+      }
+
+
   </script>
+
+
+<!--  <script>-->
+<!--    layui.use('table', function(){-->
+<!--      var table = layui.table;-->
+
+<!--      table.render({-->
+<!--        elem: '#test'-->
+<!--        ,url:'/front/queryCarByCondition' //数据接口-->
+<!--        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增-->
+<!--        ,cols: [[-->
+<!--          {field:'id', title: 'ID', sort: true}-->
+<!--          ,{field:'name', title: '名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增-->
+<!--          ,{field:'brand', title: '品牌', sort: true}-->
+<!--          ,{field:'style', title: '类型'}-->
+<!--          ,{field:'space', title: '座位数'}-->
+<!--          ,{field:'drive', title: '驱动方式', align: 'center'} //单元格内容水平居中-->
+<!--          ,{field:'color', title: '颜色', sort: true, align: 'right'} //单元格内容水平居中-->
+<!--          ,{field:'power', title: '排量', sort: true, align: 'right'}-->
+<!--          ,{field:'score', title: '租车',  align: 'right'}-->
+<!--        ]]-->
+<!--        ,page: true-->
+<!--      });-->
+<!--    });-->
+<!--  </script>-->
 
 <!--  省市区-->
   <script>
@@ -152,14 +209,14 @@
     layui.config({
       base: '/static/' //静态资源所在路径
     }).extend({
-      citypicker: 'city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+      citypicker: 'city-picker/city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
     }).use(['jquery', 'table', 'citypicker'], function () {
       var $ = layui.$
               , table = layui.table
               , form = layui.form
               , cityPicker = layui.citypicker;
 
-      var currentPicker = new cityPicker("#city-picker", {
+      var currentPicker = new cityPicker("#chooseLocation", {
         provincename:"provinceId",
         cityname:"cityId",
         districtname: "districtId",
@@ -239,6 +296,7 @@
 <section class="design-page sx-jianju">
   <div class="container">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <form id="carInfo" enctype="multipart/form-data">
           <div class="layui-form">
 
 
@@ -249,7 +307,7 @@
 
                       <label class="layui-form-label width_auto text-r" style="margin-top:1px;width: 100px">位置：</label>
                       <div class="layui-input-inline" style="width:300px">
-                        <input type="text" autocomplete="on" class="layui-input" id="city-picker" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择">
+                        <input type="text" autocomplete="on" class="layui-input" id="chooseLocation" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择">
                       </div>
 
                   </div>
@@ -271,13 +329,16 @@
                     </div>
                   </div>
 
+
+
                   <div class="layui-inline col-md-offset-1" >
-                      <button type="button" class="layui-btn layui-btn-warm layui-btn-radius">查询</button>
+                      <input type="button" class="layui-btn layui-btn-warm layui-btn-radius" id="choose" value="查询"></input>
                   </div>
 
 
 
           </div>
+        </form>
       </div>
   </div>
 </section>
@@ -293,8 +354,26 @@
 
 
 <!--          使用ajax请求-->
-          <table class="layui-hide" id="test"></table>
+<!--          <table class="layui-hide" id="test"></table>-->
+          <table class="layui-table" lay-even="" lay-skin="row">
 
+                <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>名称</th>
+                      <th>门店</th>
+                      <th>类型</th>
+                      <th>座位数</th>
+                      <th>驱动方式</th>
+                      <th>颜色</th>
+                      <th>排量</th>
+                      <th>租车</th>
+                    </tr>
+                </thead>
+                <tbody id="showCar">
+
+                </tbody>
+              </table>
 
 
 
