@@ -17,7 +17,7 @@
         $(function () {
             $("#login").click(function () {
                 $.ajax({
-                    url:"login",
+                    url:"/login",
                     //data:$("#login-form").serialize(),
                     data: {username:$("#username").val(),password:$("#password").val()},
                     type:"POST",
@@ -28,6 +28,7 @@
                     },
                     error:function () {
                         alert("失败");
+
                     }
 
                 });

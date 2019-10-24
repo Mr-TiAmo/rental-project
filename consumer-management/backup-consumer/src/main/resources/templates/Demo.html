@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 悬停表格</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.0.0-rc1/dist/jquery.min.js"></script>
+
+</head>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url:"/ManagementVoByid",
+                data:{id:"2"},
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    alert(data.data.username);
+                    $("#jobnumber").val(data.data.jobnumber);
+                    $("#juese").val(data.data.gener);
+                    $("#username").val(data.data.username);
+                    $("#password").val(data.data.password);
+                    $("#sex").val(data.data.sex);
+                    $("#createtime").val(data.data.createTime);
+                    $("#mendian").val(data.data.storeLocation);
+                    $("#updatetime").val(data.data.updateTime);
+                    $("#id").val(data.data.id);
+                    $("#pswd").val(data.data.password);
+
+                },
+                error:function () {
+                    alert("error");
+                }
+            })
+        });
+        function updatepassword() {
+           var pswd=$("#passwords").val();
+           var ids=$("#id").val();
+            $.ajax({
+                url:"/updateManagementPswd",
+                data:{id:ids,password:pswd},
+                type:"post",
+                success:function (data) {
+                    alert(data.code);
+                   if (data.code>0){
+                       location.href="/tiaozhuan";
+                   }
+                }
+            })
+        }
+
+
+    </script>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend style="color: #009688">个人信息</legend>
+</fieldset>
+
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="color: #e8e8e8">
+    修改密码
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="id">
+                旧密码<input type="password" id="password">
+                新密码<input type="password" id="passwords">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <input type="button" class="btn btn-primary"value="提交按钮"  onclick="updatepassword()"/>
+
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<table class="layui-table" lay-even="" lay-skin="row">
+    <colgroup>
+        <col width="50">
+        <col width="100">
+        <col width="50">
+        <col width="100">
+    </colgroup>
+    <tbody>
+    <tr>
+        <td>工号</td>
+        <td><input type="text" id="jobnumber"></td>
+        <td>用户角色</td>
+        <td><input type="text" id="juese"></td>
+    </tr>
+    <tr>
+        <td>姓名</td>
+        <td><input type="text" id="username"></td>
+        <td>密码</td>
+        <td><input type="password" id="pswd"></td>
+    </tr>
+    <tr>
+        <td>所属门店</td>
+        <td><input type="text" id="mendian"></td>
+        <td>创建时间</td>
+        <td><input type="text" id="createtime"></td>
+    </tr>
+    <tr>
+        <td>修改时间</td>
+        <td><input type="text" id="updatetime"></td>
+        <td>性别</td>
+        <td><input type="text" id="sex"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

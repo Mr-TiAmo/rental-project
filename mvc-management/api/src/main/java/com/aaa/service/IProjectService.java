@@ -7,7 +7,7 @@ import com.aaa.model.Order;
 import com.aaa.model.User;
 import com.aaa.vo.ManagementVo;
 import com.aaa.vo.VoCarInfo;
-import org.apache.shiro.authz.annotation.RequiresUser;
+import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +34,10 @@ public interface IProjectService {
     @PostMapping("/queryCarByCondition")
     ResultData queryCarInfo(@RequestBody VoCarInfo voCarInfo);
 
-    @RequestMapping
+    @RequestMapping("/ManagementVoByid")
     ResultData<ManagementVo> selectManagementVo(@RequestParam("id") String id);
+
+    @RequestMapping("/updateManagementPswd")
+    ResultData<Integer> updateManagementPswd(@RequestParam("password")String password,@RequestParam("id")String id);
 }
 
