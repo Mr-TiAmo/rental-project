@@ -76,4 +76,30 @@ public class CarInfoService extends BaseService<CarInfo> {
 
         return resultData;
     }
+    /**
+    * @Description:
+    * @Param:  根据id 查询汽车信息
+    * @return:
+    * @Author: 栗翱
+    * @Date: 2019/10/24
+    */
+    public ResultData selectCarById(String id){
+        ResultData resultData = new ResultData<>();
+        try {
+            VoCarInfo voCarInfo = carInfoMapper.selectCarById(id);
+            if( null != voCarInfo){
+                resultData.setCode(StatusEnum.EXIST.getCode());
+                resultData.setMsg(StatusEnum.EXIST.getMsg());
+                resultData.setData(voCarInfo);
+
+            }else{
+                resultData.setCode(StatusEnum.NOT_EXIST.getCode());
+                resultData.setMsg(StatusEnum.NOT_EXIST.getMsg());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return resultData;
+    }
 }

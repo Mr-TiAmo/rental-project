@@ -29,6 +29,8 @@
   <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
   <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
   <script>
+
+    var setMeal;
       function minDate(){
           var now = new Date();
           return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
@@ -43,7 +45,7 @@
         var r = window.location.search.substr(1).match(reg);
         if(r!=null)return  unescape(r[2]); return null;
       }
-      //alert(getQueryString("name"));
+      setMeal = getQueryString("setMeal");
 
       var dataValue;
       var dateObject;
@@ -143,6 +145,7 @@
       }
 
 
+
       var pageInfo;
 
 
@@ -161,6 +164,8 @@
               $("#showCar").empty();
               pageInfo = data.data;
               var car = data.data.list;
+              var getTime = $("#getTime").val();
+              var returnTime = $("#returnTime").val();
               var tr = "";
               for(var i = 0; i<car.length; i++){
                 tr+="<tr>";
@@ -174,7 +179,7 @@
                 tr+="<td>"+car[i].power+"</td>";
 
 
-                tr+="<td><a style='' href='/front/turnCarDetailPage' >租车</a></td>";
+                tr+="<td><a style='' href='/front/turnCarDetailPage?id="+car[i].id+"&getTime="+getTime+"&returnTime="+returnTime+"&setMeal="+setMeal+"'>租车</a></td>";
                 tr+="</tr>";
 
               }
@@ -184,6 +189,12 @@
               $("#pageinfo").html("当前页:"+data.data.pageNum+"/总页数:"+data.data.pages);
               $("#txtCurPage").val(data.data.pageNum);
 
+            }
+            if(data.code == '4'){
+              $("#showCar").empty();
+              tr += "<tr><td>暂无可用车辆！</td></tr>";
+              $("#showCar").append(tr);
+              $("#ul").hide();
             }
 
           },
@@ -391,7 +402,7 @@
 
 
 
-                    <ul class="pagination">
+                    <ul class="pagination" id="ul">
                         <li><span id="pageinfo"></span></li>
                         <li><a class="table-bordered" href="javascript:" onclick="test(1)">首页</a></li>
                         <li><a class="table-bordered" href="javascript:" onclick="test(pageInfo.prePage)">上页</a></li>

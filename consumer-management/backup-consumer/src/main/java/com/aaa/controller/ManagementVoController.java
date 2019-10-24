@@ -19,27 +19,17 @@ public class ManagementVoController {
     private IProjectService iProjectService;
 
     @ApiOperation(value = "跳转个人页面",notes = "使用springmvc的controller跳转到个人页面")
-    @RequestMapping("/tiaozhuan")
+    @RequestMapping("tiaozhuan")
     public String tiao(){
-        return "Demo";
+        return "userInfo";
     }
 
-    @ApiOperation(value = "根据id查询Management信息",notes = "根据id查询Management信息·")
-    @RequestMapping("/ManagementVoByid")
-    @ResponseBody
-    public ResultData<ManagementVo> selectManagementVo(String id){
-        ResultData<ManagementVo> vo = iProjectService.selectManagementVo(id);
-        return vo;
-    }
 
-    @ApiOperation(value = "根据ID修改密码",notes = "根据ID修改密码")
-    @RequestMapping("/updateManagementPswd")
-    @ResponseBody
-    public ResultData updateManagementPswd(@RequestParam("password") String password, @RequestParam("id") String id){
-        ResultData<Integer> data = iProjectService.updateManagementPswd(password, id);
-        return data;
+    @RequestMapping()
+    public ResultData<ManagementVo> selectManagementVo(@RequestParam("id") String id){
+        ResultData<ManagementVo> resultData = iProjectService.selectManagementVo(id);
+        return resultData;
     }
-
 
 
 

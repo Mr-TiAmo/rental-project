@@ -8,6 +8,7 @@ import com.aaa.vo.VoCarInfo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
@@ -56,8 +57,12 @@ public class CarInfoController extends BaseController {
     }
 
     @GetMapping("/turnCarDetailPage")
-    @ApiOperation(value = "跳转car页面", notes = "使用springmvc的controller跳转到car页面")
-    public String turnCarDetailPage() {
+    @ApiOperation(value = "跳转car_detail页面", notes = "使用springmvc的controller跳转到car_detail页面")
+    public String turnCarDetailPage(String id,String getTime, String returnTime,String setMeal, ModelMap map) {
+        ResultData<VoCarInfo> voCarInfoResultData = projectService.selectCarById(id);
+        voCarInfoResultData.getData().setGetTime(getTime).setReturnTime(returnTime).setSetMeal(setMeal);
+        System.out.println(voCarInfoResultData.getData());
+        map.addAttribute("voCarInfo",voCarInfoResultData.getData());
         return "car_detail";
     }
 }

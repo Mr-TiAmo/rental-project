@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -229,46 +231,49 @@
 							<!--						要显示的车辆信息-->
 							<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 								<figure>
-									<a href="javascript:;" title="时尚 省油"><img src="/static/skin/images/1-1P3201024310-L.jpg" alt="时尚 省油" />
-										<figcaption>
-											<h3>时尚 省油<span>现代SUV</span></h3>
-										</figcaption>
+									<a href="javascript:;" title="时尚 省油"><img th:src="${voCarInfo.picPath}" alt="时尚 省油" />
+
 									</a>
 								</figure>
 							</div>
+
 							<!--						end-->
 							<div class="container design-page sx-jianju col-xs-6">
 <!--							-->
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									品牌: <span > 180.00</span>
+
+									品牌: <span id="name"  th:text="${voCarInfo.name}" style='color: goldenrod'>  </span>
+
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									类型: <span > 180.00</span>
+
+									类型: <span id="style" th:text="${voCarInfo.style}" style='color: goldenrod'>  </span>
+
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									座位数: <span > 180.000000</span>
+									座位数: <span id="space" th:text="${voCarInfo.space}" style='color: goldenrod'>  </span>
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									驱动方式: <span > 180.00</span>
+									驱动方式: <span id="drive" th:text="${voCarInfo.drive}" style='color: goldenrod'>  </span>
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									颜色: <span > 180.00</span>
+									颜色: <span id="color" th:text="${voCarInfo.color}" style='color: goldenrod'>  </span>
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									排量: <span > 180.00</span>
+									排量: <span id="power" th:text="${voCarInfo.power}" style='color: goldenrod'>  </span>
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									燃料类型: <span > 180.00</span>
+									燃料类型: <span id="fuel" th:text="${voCarInfo.fuel}" style='color: goldenrod'>  </span>
 								</div>
 
 								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
-									日租金: <span > 180.00</span>
+									日租金: <span id="charge" th:text="${voCarInfo.charge}" style='color: goldenrod'>  </span>
 								</div>
 
 							</div>
@@ -327,7 +332,7 @@
 							<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 wow animated fadeInUp">
 								<figcaption>
 									<h3>支付方式</h3>
-									<input type="radio" name="payType" title="门店支付">
+									<input type="radio" name="payType" value="" title="门店支付">
 									<input type="radio" name="payType" title="线上支付">
 								</figcaption>
 							</div>
@@ -358,7 +363,7 @@
 									<script>
 										$("#base").hover(function () {
 											$("#serviceInfo").show();
-											$("#serviceInfo").html("保障内容:<br/>1.全国道路救援<br/>2.车损5000元以下无需承担车辆维修的赔偿<br/><span style='color: goldenrod'>金额： 55元/天</span>");
+											$("#serviceInfo").html("保障内容:<br/>1.全国道路救援<br/>2.车损5000元以下无需承担车辆维修的赔偿<br/><span style='color: goldenrod'>金额： 50元/天</span>");
 										},function () {
 											$("#serviceInfo").hide();
 											}
@@ -366,7 +371,7 @@
 
 										$("#high").hover(function () {
 											$("#serviceInfo").show();
-											$("#serviceInfo").html("保障内容:<br/>1.全国道路救援<br/>2.三者保障限额增加至50万<br/>3.车损5000元以下无需承担车辆维修的赔偿<br/><span style='color: goldenrod'>金额： 88元/天</span>");
+											$("#serviceInfo").html("保障内容:<br/>1.全国道路救援<br/>2.三者保障限额增加至50万<br/>3.车损5000元以下无需承担车辆维修的赔偿<br/><span style='color: goldenrod'>金额： 100元/天</span>");
 											},function () {
 												$("#serviceInfo").hide();
 											}
@@ -400,16 +405,16 @@
 
 									<div  class="container">
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
-										<span style=": 500px">车辆押金（可退）:</span> <span >4000</span>
+										<span style=": 500px">车辆押金（可退）:</span> <span id="cashPledge" th:text="${voCarInfo.charge}*20"  style='color: goldenrod'></span>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
-											<span style="width: 500px">车辆租赁费及门店服务费:</span> <span>3000</span>
+											<span style="width: 500px">车辆租赁费及门店服务费:</span> <span  style='color: goldenrod'>300</span>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
-											<span style="width: 500px">基本保障服务费:</span> <span>400</span>
+											<span style="width: 500px">基本保障服务费:</span> <span style='color: goldenrod'>400</span>
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
-											<span style="width: 500px">其他服务费:</span> <span>300</span>
+											<span style="width: 500px">其他服务费:</span> <span style='color: goldenrod'>100</span>
 										</div>
 
 									</div>

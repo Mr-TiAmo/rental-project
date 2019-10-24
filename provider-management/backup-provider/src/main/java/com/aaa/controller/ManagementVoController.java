@@ -15,18 +15,11 @@ public class ManagementVoController {
     private ManagementVoService managementVoService;
 
 
-    @RequestMapping("/ManagementVoByid")
     @ResponseBody
+    @RequestMapping()
     public ResultData<ManagementVo> selectManagementVo(String id){
         ResultData<ManagementVo> vo = managementVoService.selectManagementVo(id);
         return vo;
-    }
-
-    @RequestMapping("/updateManagementPswd")
-    @ResponseBody
-    public ResultData updateManagementPswd(String password, String id){
-        ResultData data = managementVoService.updateManagementPswd(password, id);
-        return data;
     }
 
 }
