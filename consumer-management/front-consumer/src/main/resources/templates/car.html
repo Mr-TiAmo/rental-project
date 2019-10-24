@@ -123,21 +123,35 @@
   <script>
       $(function () {
 
-        test();
+        test(1);
 
         $("#choose").click(function () {
-          test();
+          test(1);
         });
 
       });
 
 
-      function test(){
+      function getCar() {
+
+          $.ajax({
+             type:"get",
+              url:"",
+              data:"",
+
+          });
+      }
+
+
+      var pageInfo;
+
+
+      function test(pageNum){
         // var formData = new FormData($("#carInfo")[1]);
         // alert(formData);
         $.ajax({
           url:"/front/queryCarByCondition",
-          data: {"chooseLocation":$("#chooseLocation").val(),"getTime":$("#getTime").val(),"returnTime":$("#returnTime").val()},
+          data: {"chooseLocation":$("#chooseLocation").val(),"getTime":$("#getTime").val(),"returnTime":$("#returnTime").val(),"pageNum":pageNum},
           type:"POST",
           dataType: "json",
           // processData: false,
@@ -145,7 +159,8 @@
           success:function (data) {
             if(data.code == '3'){
               $("#showCar").empty();
-              var car = data.data;
+              pageInfo = data.data;
+              var car = data.data.list;
               var tr = "";
               for(var i = 0; i<car.length; i++){
                 tr+="<tr>";
@@ -159,12 +174,16 @@
                 tr+="<td>"+car[i].power+"</td>";
 
 
-                tr+="<td><a style='' href='' >租车</a></td>";
+                tr+="<td><a style='' href='/front/turnCarDetailPage' >租车</a></td>";
                 tr+="</tr>";
 
               }
 
               $("#showCar").append(tr);
+              //初始化分页信息
+              $("#pageinfo").html("当前页:"+data.data.pageNum+"/总页数:"+data.data.pages);
+              $("#txtCurPage").val(data.data.pageNum);
+
             }
 
           },
@@ -175,34 +194,15 @@
       }
 
 
+      //点击GO跳转
+      function  btnGoUser() {
+        test($("#txtCurPage").val());
+      }
+
+
   </script>
 
 
-<!--  <script>-->
-<!--    layui.use('table', function(){-->
-<!--      var table = layui.table;-->
-
-<!--      table.render({-->
-<!--        elem: '#test'-->
-<!--        ,url:'/front/queryCarByCondition' //数据接口-->
-<!--        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增-->
-<!--        ,cols: [[-->
-<!--          {field:'id', title: 'ID', sort: true}-->
-<!--          ,{field:'name', title: '名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增-->
-<!--          ,{field:'brand', title: '品牌', sort: true}-->
-<!--          ,{field:'style', title: '类型'}-->
-<!--          ,{field:'space', title: '座位数'}-->
-<!--          ,{field:'drive', title: '驱动方式', align: 'center'} //单元格内容水平居中-->
-<!--          ,{field:'color', title: '颜色', sort: true, align: 'right'} //单元格内容水平居中-->
-<!--          ,{field:'power', title: '排量', sort: true, align: 'right'}-->
-<!--          ,{field:'score', title: '租车',  align: 'right'}-->
-<!--        ]]-->
-<!--        ,page: true-->
-<!--      });-->
-<!--    });-->
-<!--  </script>-->
-
-<!--  省市区-->
   <script>
 
 
@@ -384,7 +384,32 @@
 </section>
 
 <!--end-->
+<section class="design-page sx-jianju" style="z-index: -100">
+  <div class="container " >
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow animated fadeInUp">
+      <div class="layui-form">
 
+
+
+                    <ul class="pagination">
+                        <li><span id="pageinfo"></span></li>
+                        <li><a class="table-bordered" href="javascript:" onclick="test(1)">首页</a></li>
+                        <li><a class="table-bordered" href="javascript:" onclick="test(pageInfo.prePage)">上页</a></li>
+                        <li><a class="table-bordered" href="javascript:" onclick="test(pageInfo.nextPage)">下页</a></li>
+                        <li><a class="table-bordered" href="javascript:" onclick="test(pageInfo.pages)">尾页</a></li>
+                        <li>
+                          <input type="number" class="table-bordered" name="curPage"   min="1" max="" step="1" id="txtCurPage" />
+                        </li>
+                        <li>
+                          <input type="button" value="Go" id="btnGo" class="btn btn-primary" onclick="btnGoUser()"/>
+                        </li>
+                      </ul>
+
+
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!--end-->

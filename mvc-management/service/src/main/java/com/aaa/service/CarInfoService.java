@@ -28,39 +28,52 @@ public class CarInfoService extends BaseService<CarInfo> {
     }
 
     /**
-     * @Description: 根据条件查询车辆信息
-     * @Param:
-     * @return:
-     * @Author: 栗翱
-     * @Date: 2019/10/22
-     */
-//    public ResultData queryCarInfo(VoCarInfo voCarInfo){
-//        ResultData resultData = new ResultData<T>();
-//        try {
-//
-//            List<VoCarInfo> voCarInfos = carInfoMapper.queryCarInfo(voCarInfo);
+    * @Description: 根据条件查询车辆信息
+    * @Param:
+    * @return:
+    * @Author: 栗翱
+    * @Date: 2019/10/22
+    */
+    public ResultData queryCarInfo(VoCarInfo voCarInfo){
+        ResultData resultData = new ResultData<>();
+        List<VoCarInfo> voCarInfos = null;
+
+        try {
+
+           //设置分页的参数
+            Integer pageNum = voCarInfo.getPageNum();
+            Integer pageSize = voCarInfo.getPageSize();
+            if(null == pageNum ){
+                pageNum = 1;
+            }
+            if(null == pageSize){
+                pageSize = 10;
+            }
 
 
-//            //分页
-//            PageHelper.startPage(1, 3);
-//            PageInfo<VoCarInfo> pageInfo = new PageInfo<VoCarInfo>(voCarInfos);
-//            pageInfo.setTotal(carInfoMapper.queryCarInfoConut(voCarInfo));
+
+            PageHelper.startPage(pageNum, pageSize);
+            voCarInfos = carInfoMapper.queryCarInfo(voCarInfo);
+            PageInfo<VoCarInfo> pageInfo = new PageInfo<VoCarInfo>(voCarInfos);
+            pageInfo.setTotal(voCarInfos.size());
 
 
-//            //查询到值
-////            if(voCarInfos.size()>0){
-////                resultData.setCode(StatusEnum.EXIST.getCode());
-////                resultData.setMsg(StatusEnum.EXIST.getMsg());
-////                resultData.setData(voCarInfos);
-////            }else{
-////                resultData.setCode(StatusEnum.NOT_EXIST.getCode());
-////                resultData.setMsg(StatusEnum.NOT_EXIST.getMsg());
-////            }
-////        }catch (Exception e){
-////            e.printStackTrace();
-////        }
-////
-////
-////        return resultData;
-////    }
+
+            //查询到值
+            if(voCarInfos.size()>0){
+                resultData.setCode(StatusEnum.EXIST.getCode());
+                resultData.setMsg(StatusEnum.EXIST.getMsg());
+                resultData.setData(pageInfo);
+
+            }else{
+                resultData.setCode(StatusEnum.NOT_EXIST.getCode());
+                resultData.setMsg(StatusEnum.NOT_EXIST.getMsg());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return resultData;
+    }
 }

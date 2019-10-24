@@ -1,6 +1,7 @@
 package com.aaa.vo;
 
 
+import com.aaa.page.PageInfos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class VoCarInfo implements Serializable {
+public class VoCarInfo  implements Serializable {
+
+    /**
+     * 当前页码数
+     */
+    private Integer pageNum;
+
+    /**
+     * 每一页显示的条数
+     */
+    private Integer pageSize;
     /**
      * 车辆的id
      */

@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 /**
 * @Description:
 * @Param:
@@ -31,10 +34,15 @@ public class CarInfoController extends BaseController {
     @PostMapping("/queryCarByCondition")
     @ApiOperation(value = "按条件查询carInfo", notes= "按条件查询carInfo")
     @ResponseBody
-    public ResultData queryCarInfo(String chooseLocation, String getTime, String returnTime){
+    public ResultData queryCarInfo(String pageNum,String chooseLocation, String getTime, String returnTime){
+        try {
+            URLDecoder.decode(chooseLocation, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String location = chooseLocation.replaceAll("/", "");
         VoCarInfo voCarInfo = new VoCarInfo();
-        voCarInfo.setChooseLocation(location).setGetTime(getTime).setReturnTime(returnTime);
+        voCarInfo.setChooseLocation(location).setGetTime(getTime).setReturnTime(returnTime).setPageNum(Integer.parseInt(pageNum.trim()));
         System.out.println(chooseLocation);
         ResultData resultData = projectService.queryCarInfo(voCarInfo);
         System.out.println(resultData.getData());
@@ -45,5 +53,11 @@ public class CarInfoController extends BaseController {
     @ApiOperation(value = "跳转car页面", notes = "使用springmvc的controller跳转到car页面")
     public String turnCarPage() {
         return "car";
+    }
+
+    @GetMapping("/turnCarDetailPage")
+    @ApiOperation(value = "跳转car页面", notes = "使用springmvc的controller跳转到car页面")
+    public String turnCarDetailPage() {
+        return "car_detail";
     }
 }
